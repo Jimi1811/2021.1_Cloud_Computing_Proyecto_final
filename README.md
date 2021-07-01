@@ -9,12 +9,13 @@ Este repositorio se usará para presentar el proyecto final del curso "Cloud com
 3. ¿Porque  escogió  esa  aplicación? 
 
 Al ser de otra carrera, Ingeniería Mecatrónica, buscamos una aplicación que se relacione con esta, siendo Internet de las cosas (IoT) un punto de intersección entre ambos campos de la computación y automatización.
-5. ¿Qué  características  de  la  computación  en  nube pueden ser integradas en la aplicación? 
+
+4. ¿Qué  características  de  la  computación  en  nube pueden ser integradas en la aplicación? 
     Docker 
       - Minikube 
     Spark
     Streaming
     VM
     
-7. Resumen de los pasos necesarios para su ejecución.
+5. Resumen de los pasos necesarios para su ejecución.
  
