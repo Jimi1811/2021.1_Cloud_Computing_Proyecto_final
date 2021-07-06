@@ -7,10 +7,16 @@ Para la recepción y gestión de datos recibidos de dispositivos IoT se usa el b
 1.1. Arquitectura
     EMQX hace posible la comunicación entre un dispositivo IoT hacía una máquina o cliente, siendo este receptor el que decida si se almacena o se gestiona los datos.
 ![1](https://user-images.githubusercontent.com/40177903/124541985-2b16d580-dde8-11eb-9835-58f4bc264d64.png)
-2.1. Funcionalidad
+1.2. Funcionalidad
 ![2](https://user-images.githubusercontent.com/40177903/124541995-310cb680-dde8-11eb-835f-8232cd5148c9.png)
     Publisher - subscriber: Recibe de un dispositivo (publisher) información y envía a un tercero ( Subscriber). Si no hay nadie recibiéndolo, los datos se pierden.
 
+1.3 Referencias
+- [https://docs.emqx.io/en/broker/v4.3/](https://docs.emqx.io/en/broker/v4.3/)
+- [https://www.emqx.io/?spm=docs](https://www.emqx.io/?spm=docs)
+- [https://mqtt.org/software/](https://mqtt.org/software/)
+- [https://www.youtube.com/watch?v=hT5VPN6aEJM&t=126s](https://www.youtube.com/watch?v=hT5VPN6aEJM&t=126s)
+- [https://www.youtube.com/watch?v=_SDLiqG6Rgo&list=PL8HAlytDEGGhA9kPfTCAlPvTgeoInKE5n](https://www.youtube.com/watch?v=_SDLiqG6Rgo&list=PL8HAlytDEGGhA9kPfTCAlPvTgeoInKE5n)
 2. ¿Porque  escogió  esa  aplicación? 
 
 Al ser de otra carrera, Ingeniería Mecatrónica, buscamos una aplicación que se relacione con containers, siendo Internet de las cosas (IoT) un punto de intersección entre ambos campos de la computación y automatización. En términos de escalabilidad, el uso de containers es necesario para poder recibir y poder procesar datos de cientos o miles de gadgets que envíen datos. Este con el fin de poder ahorrar en hardware así como poder gestionar y tener respuestas rápidas ante cualquier evento de tráfico que llegue a ocurrir. Por ese motivo es que elegimos el broker EDMX, ya que se puede aplica con containers y es capaz de gestionar hasta 100000 de conexiones.
