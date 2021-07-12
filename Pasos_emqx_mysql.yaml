@@ -1,0 +1,4 @@
+$ docker -v
+$ docker ps #para ver los contenedores
+$ docker ps -a #para ver más información
+$ docker exec -it -contenedor- bash
