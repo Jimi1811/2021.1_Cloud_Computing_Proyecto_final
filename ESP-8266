@@ -1,0 +1,74 @@
+#include <ESP8266WiFi.h>
+#include <PubSubClient.h>
+
+// WiFi
+const char *ssid = "MarcoBC. TP"; // Enter your WiFi name
+const char *password = "carmenr09";  // Enter WiFi password
+
+// MQTT Broker
+const char *mqtt_broker = "192.168.0.13";
+const char *topic = "esp8266-1/datos";
+const char *mqtt_username = "curso_iot";
+const char *mqtt_password = "12345";
+const int mqtt_port = 1883;
+
+String placa,np1,np2,np3,gl,rpm, vbateria, adblue, ubicacion, mensaje;
+
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+void setup() {
+ // Set software serial baud to 115200;
+ Serial.begin(115200);
+ // connecting to a WiFi network
+ WiFi.begin(ssid, password);
+ while (WiFi.status() != WL_CONNECTED) {
+     delay(500);
+     Serial.println("Connecting to WiFi..");
+ }
+ Serial.println("Connected to the WiFi network");
+ //connecting to a mqtt broker
+ client.setServer(mqtt_broker, mqtt_port);
+ client.setCallback(callback);
+ while (!client.connected()) {
+     String client_id = "esp8266-client-";
+     client_id += String(WiFi.macAddress());
+     Serial.printf("The client %s connects to the public mqtt broker\n", client_id.c_str());
+     if (client.connect(client_id.c_str(), mqtt_username, mqtt_password)) {
+         Serial.println("Public emqx mqtt broker connected");
+     } else {
+         Serial.print("failed with state ");
+         Serial.print(client.state());
+         delay(2000);
+     }
+ }
+ // publish and subscribe
+ client.subscribe(topic);
+}
+
+void callback(char *topic, byte *payload, unsigned int length) {
+ Serial.print("Message arrived in topic: ");
+ Serial.println(topic);
+ Serial.print("Message:");
+ for (int i = 0; i < length; i++) {
+     Serial.print((char) payload[i]);
+ }
+ Serial.println();
+ Serial.println("-----------------------");
+}
+
+void loop() {
+  np1=random(0,9);
+  np2=random(0,9);
+  np3=random(0,9);
+ placa="P"+np1+"F-"+"C"+np2+np3;
+  gl =random(0,70);
+  rpm=random(1100,2200);
+  vbateria=random(0,24);
+  adblue=random(0,6);
+  mensaje = "{\"placa\": \""+placa+"\",\"galones\":"+gl+",\"rpm\":"+rpm+",\"bateria\":"+vbateria+",\"adblue\":"+adblue+"}";
+  client.publish(topic, (char*) mensaje.c_str());
+ client.loop();
+ delay(3000);
+}
