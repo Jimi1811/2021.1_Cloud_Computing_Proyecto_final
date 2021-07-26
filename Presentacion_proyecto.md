@@ -2,14 +2,14 @@
 Este repositorio se usará para presentar el proyecto final del curso "Cloud computing" de la "Universidad de Ingeniería y Tecnología (UTEC)" en el ciclo 2021-1.
 1. Datos del proyecto(Aplicación que se va a usar)
 
-Para la recepción y gestión de datos recibidos de dispositivos IoT se usa el broker EMQX, siendo este la aplicación a desarrollarse. EMQX es un broker de mensajería MQTT (protocolo enfocado en el transporte de datos IoT) distribuido de código abierto y con alta escalabilidad.
+Para la recepción y gestión de datos recibidos de dispositivos IoT se usa el broker EMQX Enterprise, siendo este la aplicación a desarrollarse. EMQX enterprise es un broker de mensajería MQTT (protocolo enfocado en el transporte de datos IoT) distribuido de código abierto y con alta escalabilidad.
 
 1.1. Arquitectura
     EMQX hace posible la comunicación entre un dispositivo IoT hacía una máquina o cliente, siendo este receptor el que decida si se almacena o se gestiona los datos.
 ![1](https://user-images.githubusercontent.com/40177903/124541985-2b16d580-dde8-11eb-9835-58f4bc264d64.png)
 1.2. Funcionalidad
 ![2](https://user-images.githubusercontent.com/40177903/124541995-310cb680-dde8-11eb-835f-8232cd5148c9.png)
-    Publisher - subscriber: Recibe de un dispositivo (publisher) información y envía a un tercero ( Subscriber). Si no hay nadie recibiéndolo, los datos se pierden.
+    Publisher - subscriber: Recibe de un dispositivo (publisher) información y envía a un tercero (Subscriber). Si no hay nadie recibiéndolo, los datos se pierden.
 
 1.3 Referencias
 - [https://docs.emqx.io/en/broker/v4.3/](https://docs.emqx.io/en/broker/v4.3/)
@@ -19,7 +19,7 @@ Para la recepción y gestión de datos recibidos de dispositivos IoT se usa el b
 - [https://www.youtube.com/watch?v=_SDLiqG6Rgo&list=PL8HAlytDEGGhA9kPfTCAlPvTgeoInKE5n](https://www.youtube.com/watch?v=_SDLiqG6Rgo&list=PL8HAlytDEGGhA9kPfTCAlPvTgeoInKE5n)
 2. ¿Porque  escogió  esa  aplicación? 
 
-Al ser de otra carrera, Ingeniería Mecatrónica, buscamos una aplicación que se relacione con containers, siendo Internet de las cosas (IoT) un punto de intersección entre ambos campos de la computación y automatización. En términos de escalabilidad, el uso de containers es necesario para poder recibir y poder procesar datos de cientos o miles de gadgets que envíen datos. Este con el fin de poder ahorrar en hardware así como poder gestionar y tener respuestas rápidas ante cualquier evento de tráfico que llegue a ocurrir. Por ese motivo es que elegimos el broker EDMX, ya que se puede aplica con containers y es capaz de gestionar hasta 100000 de conexiones.
+Al ser de otra carrera, Ingeniería Mecatrónica, buscamos una aplicación que se relacione con containers, siendo Internet de las cosas (IoT) un punto de intersección entre ambos campos de la computación y automatización. En términos de escalabilidad, el uso de containers es necesario para poder recibir y poder procesar datos de cientos o miles de gadgets que envíen datos. Este con el fin de poder ahorrar en hardware así como poder gestionar y tener respuestas rápidas ante cualquier evento de tráfico que llegue a ocurrir. Por ese motivo es que elegimos el broker EMQX Enterprise, ya que se puede aplicar con containers y es capaz de gestionar hasta 100000 de conexiones.
 
 3. ¿Qué  características  de  la  computación  en  nube pueden ser integradas en la aplicación? 
     1. On-demand self service
@@ -36,7 +36,7 @@ Al ser de otra carrera, Ingeniería Mecatrónica, buscamos una aplicación que s
 
 4. Resumen de los pasos necesarios para su ejecución.
 
-En este caso instalaremos EQMX en Docker.
+En este caso instalaremos EQMX Enterprise en Docker.
 
 4.1. Obtenemos la imagen
     - Desde **[Docker Hub](https://hub.docker.com/r/emqx/emqx)**
@@ -60,6 +60,16 @@ En este caso instalaremos EQMX en Docker.
     ```
  
 5. Descripción del proyecto
+
+EMQX Enterprise conviene que se corra en un servicio de cloud computing. Por tal motivo se escogió utilizar distintos tipos de servicios de AWS, con el fin de progresivamente tener mejores resultados y mostrar una correcta implementación con sus respectivos resultados. Para realizarlo, tendremos 3 versiones de este proyecto:
+- Versión 1: Instalación de EMQX Enterprise en Docker de una laptop física con la base de datos en AWS. 
+- Versión 2: Instalación de EMQX Enterprise en Docker del servicio de AWS "" con la base de datos en AWS.
+    En este caso tendríamos EMQX en containers y ambos en la nube de un solo proveedor. Sin embargo, no se tendrían todas las herramientas para su monitoreo y se tienen que instalar aparte, así como crear scripts para automatizarlos y conectarlos con los containers.
+- Versión 3: Instalación de EMQX Enterprise en Docker del servicio de AWS "EKS" con la base de datos en AWS.
+    En este caso tendríamos corriendo EMQX y la base de datos en Kubernetes. De esta manera se hace mucho más sencillo su monitoreo y su escalabilidad.
+    
+Una vez obtenido el broker corriendo, se usa un ESP para obtener datos IoT. A continuación se describen los elementos utilizados. 
+
 - Uso de ESP
 
     Nos ayudará a emular y enviar datos del vehículo en cuestión.
